@@ -8,11 +8,10 @@ export const LanguageSelector = () => {
   const intl = useIntl()
   const supportedLanguages = getSupportedLanguages()
   const languageOptions = useMemo(() => {
-    console.log(`Genearating langOpts again for ${intl.locale}`)
     return supportedLanguages.map(lang => (
-      <option key={lang} value={lang}>{intl.formatDisplayName(lang)}</option>
+      <option key={lang} value={lang}>{intl.formatDisplayName(lang) || lang}</option>
     ))
-  }, [intl.locale]) /* eslint-disable-line */
+  }, [intl.locale, supportedLanguages])
 
   return (
     <Flex flexDirection='column'>
@@ -20,7 +19,9 @@ export const LanguageSelector = () => {
       <Box>
         <Select
           defaultValue={intl.locale}
-          onChange={(event) => intl.setLocale(event.target.value)}
+          onChange={(event) =>
+            intl.setLocale(event.target.value)
+          }
         >
           {languageOptions}
         </Select>

@@ -1,6 +1,7 @@
 /* global require, module, process */
 
 const electron = require('electron')
+const osLocale = require('os-locale')
 
 const isWinOS = process.platform === 'win32'
 
@@ -26,7 +27,8 @@ const mainWindow = () => {
     }
   })
 
-  win.loadURL(windowURL('home'))
+  const locale = osLocale.sync() || 'en'
+  win.loadURL(windowURL(`home?lang=${locale}`))
   return win
 }
 

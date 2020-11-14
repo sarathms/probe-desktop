@@ -80,7 +80,7 @@ const Settings = () => {
               </Section>
 
               {/* Storage Usage (TODO) */}
-              
+
               {/* Privacy */}
               <Section title={<FormattedMessage id='Settings.Privacy.Label' />}>
                 <BooleanOption
@@ -101,7 +101,7 @@ const Settings = () => {
                 />
               </Section>
 
-              <Text my={3}>OONI Probe Desktop v{pkgJson.version}</Text>
+              <Text my={3}>OONI Probe Desktop vv{pkgJson.version}</Text>
 
             </ConfigProvider>
           </Container>

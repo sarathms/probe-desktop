@@ -3,25 +3,30 @@ import osLocale from 'os-locale'
 
 const defaultLocale = 'en'
 const defaultLocaleName = 'English'
+const localeDir = '../../lang'
 
 export const getMessages = (locale = null) => {
-  let supportedMessages = {
-    en: require('../../lang/en.json')
-  }
+  const defaultMessages = require('../../lang/en.json')
 
-  if (typeof window !== 'undefined' && window.OONITranslations) {
-    supportedMessages = window.OONITranslations
-  }
+  // TODO check if ${locale} is supported
 
-  if (supportedMessages.hasOwnProperty(locale)) {
-    const mergedMessages = Object.assign(
-      {},
-      process.env.INTL_USE_FALLBACK_EN ? supportedMessages[defaultLocale] : {},
-      supportedMessages[locale])
-    return mergedMessages
-  } else {
-    return supportedMessages
-  }
+  const localeMessages = require(`../../lang/${locale}.json`)
+  const mergedMessages = Object.assign({}, defaultMessages, localeMessages)
+  return mergedMessages
+
+  // if (typeof window !== 'undefined' && window.OONITranslations) {
+  //   supportedMessages = window.OONITranslations
+  // }
+  //
+  // if (supportedMessages.hasOwnProperty(locale)) {
+  //   const mergedMessages = Object.assign(
+  //     {},
+  //     process.env.INTL_USE_FALLBACK_EN ? supportedMessages[defaultLocale] : {},
+  //     supportedMessages[locale])
+  //   return mergedMessages
+  // } else {
+  //   return defaultMessages
+  // }
 }
 
 export const getSupportedLanguages = () => {
